@@ -37,7 +37,16 @@ struct ContentView: View {
 		}
 	}
 }
-
+enum Player{
+	case human, computer
+}
+struct move {
+	let player: Player
+	let boardIndex: Int
+	var inducator: String {
+		return player == .human ? "xmark" : "circle"
+	}
+}
 #Preview {
 	ContentView()
 }
