@@ -25,10 +25,14 @@ struct ContentView: View {
 								.foregroundColor(.black)
 								.opacity(1)
 								.frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
-							Image(systemName: "xmark")
+							Image(systemName: moves[i]?.inducator ?? "")
 								.resizable()
 								.frame(width: 40, height: 40)
 								.foregroundColor(.white)
+						}
+						.onTapGesture {
+							moves[i] = Move(player: isHumanTurn ? .human : .computer, boardIndex: i)
+							isHumanTurn.toggle()
 						}
 					}
 				}
