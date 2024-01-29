@@ -28,11 +28,16 @@ struct ContentView: View {
 							Image(systemName: moves[i]?.inducator ?? "")
 								.resizable()
 								.frame(width: 40, height: 40)
-								.foregroundColor(.white)
+								.foregroundColor(.red)
 						}
 						.onTapGesture {
-							moves[i] = Move(player: isHumanTurn ? .human : .computer, boardIndex: i)
-							isHumanTurn.toggle()
+							if moves[i] == nil {
+								moves[i] = Move(player: isHumanTurn ? .human : .computer, boardIndex: i)
+								isHumanTurn.toggle()
+							} else {
+								// Kare doluysa, hiçbir şey yapma
+								print("Bu kare dolu!")
+							}
 						}
 					}
 				}
