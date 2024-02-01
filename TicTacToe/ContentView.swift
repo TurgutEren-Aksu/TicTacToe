@@ -32,6 +32,9 @@ struct ContentView: View {
 						.onTapGesture {
 							if isSquareOccupied(in: moves, forIndex: i) {return}
 								moves[i] = Move(player: .human, boardIndex: i)
+							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+								let computerPosition = computer(in: moves)
+							}
 						}
 					}
 				}
