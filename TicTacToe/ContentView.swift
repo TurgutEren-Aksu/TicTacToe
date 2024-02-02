@@ -34,6 +34,7 @@ struct ContentView: View {
 								moves[i] = Move(player: .human, boardIndex: i)
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
 								let computerPosition = computer(in: moves)
+								moves[i] = Move(player: .human, boardIndex: i)
 							}
 						}
 					}
