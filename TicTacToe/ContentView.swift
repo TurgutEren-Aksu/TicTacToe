@@ -34,7 +34,7 @@ struct ContentView: View {
 								moves[i] = Move(player: .human, boardIndex: i)
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
 								let computerPosition = computer(in: moves)
-								moves[i] = Move(player: .human, boardIndex: i)
+								moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
 							}
 						}
 					}
@@ -53,7 +53,7 @@ struct ContentView: View {
 		var movePosition = Int.random(in: 0..<9)
 		
 		while isSquareOccupied(in: moves, forIndex: movePosition){
-			var movePosition = Int.random(in: 0..<9)
+			movePosition = Int.random(in: 0..<9)
 		}
 		
 		return movePosition
