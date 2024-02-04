@@ -13,6 +13,7 @@ struct ContentView: View {
 							   GridItem(.flexible()),
 							   GridItem(.flexible())]
 	@State private var moves: [Move?] = Array(repeating: nil, count: 9)
+	@State private var disabled = false
 	var body: some View {
 		GeometryReader{ geometry in
 			VStack{
@@ -32,9 +33,11 @@ struct ContentView: View {
 						.onTapGesture {
 							if isSquareOccupied(in: moves, forIndex: i) {return}
 								moves[i] = Move(player: .human, boardIndex: i)
+							disabled = true
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
 								let computerPosition = computer(in: moves)
 								moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
+								disabled = false
 							}
 						}
 					}
@@ -42,6 +45,7 @@ struct ContentView: View {
 				Spacer()
 				// dont use spacer you must be editing
 			}
+			.disabled(disabled)
 			.padding()
 		}
 	}
