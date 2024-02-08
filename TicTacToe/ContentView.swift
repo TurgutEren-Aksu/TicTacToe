@@ -34,10 +34,22 @@ struct ContentView: View {
 							if isSquareOccupied(in: moves, forIndex: i) {return}
 								moves[i] = Move(player: .human, boardIndex: i)
 							disabled = true
+							if winCheck(for: .human, in: moves){
+								print("Human wins")
+							}
+							if checkDraw(in: moves){
+								print("Draw")
+							}
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
 								let computerPosition = computer(in: moves)
 								moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
 								disabled = false
+								if winCheck(for: .computer, in: moves){
+									print("Computer wins")
+								}
+								if checkDraw(in: moves){
+									print("Draw")
+								}
 							}
 						}
 					}
@@ -70,6 +82,9 @@ struct ContentView: View {
 		let playerPosition = Set(playerMove.map{$0.boardIndex})
 		for pattern in winPatterns where pattern.isSubset(of: playerPosition) { return false }
 		return true
+	}
+	func checkDraw(in moves: [Move?]) -> Bool{
+		return moves.compactMap{ $0 }.count == 9
 	}
 }
 
