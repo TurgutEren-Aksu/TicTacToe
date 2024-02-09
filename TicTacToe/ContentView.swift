@@ -36,9 +36,11 @@ struct ContentView: View {
 							disabled = true
 							if winCheck(for: .human, in: moves){
 								print("Human wins")
+								return
 							}
 							if checkDraw(in: moves){
 								print("Draw")
+								return
 							}
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
 								let computerPosition = computer(in: moves)
@@ -46,9 +48,11 @@ struct ContentView: View {
 								disabled = false
 								if winCheck(for: .computer, in: moves){
 									print("Computer wins")
+									return
 								}
 								if checkDraw(in: moves){
 									print("Draw")
+									return
 								}
 							}
 						}
