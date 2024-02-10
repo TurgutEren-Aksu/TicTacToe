@@ -14,6 +14,7 @@ struct ContentView: View {
 							   GridItem(.flexible())]
 	@State private var moves: [Move?] = Array(repeating: nil, count: 9)
 	@State private var disabled = false
+	@State private var alert: Alerts?
 	var body: some View {
 		GeometryReader{ geometry in
 			VStack{
@@ -63,6 +64,9 @@ struct ContentView: View {
 			}
 			.disabled(disabled)
 			.padding()
+			.alert(item: $alert, content: {alert in
+				Alert(title: alert.title, message: alert.message, dismissButton: .default(alert.buttonTitle, action: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>))
+			})
 		}
 	}
 	
