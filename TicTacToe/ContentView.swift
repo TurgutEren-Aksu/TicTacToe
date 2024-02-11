@@ -36,11 +36,11 @@ struct ContentView: View {
 								moves[i] = Move(player: .human, boardIndex: i)
 							disabled = true
 							if winCheck(for: .human, in: moves){
-								print("Human wins")
+								alert = AlertContext.humanWin
 								return
 							}
 							if checkDraw(in: moves){
-								print("Draw")
+								alert = AlertContext.draw
 								return
 							}
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
@@ -48,11 +48,11 @@ struct ContentView: View {
 								moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
 								disabled = false
 								if winCheck(for: .computer, in: moves){
-									print("Computer wins")
+									alert = AlertContext.computerWin
 									return
 								}
 								if checkDraw(in: moves){
-									print("Draw")
+									alert = AlertContext.draw
 									return
 								}
 							}
@@ -60,12 +60,11 @@ struct ContentView: View {
 					}
 				}
 				Spacer()
-				// dont use spacer you must be editing
 			}
 			.disabled(disabled)
 			.padding()
 			.alert(item: $alert, content: {alert in
-				Alert(title: alert.title, message: alert.message, dismissButton: .default(alert.buttonTitle, action: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>))
+				Alert(title: alert.title, message: alert.message, dismissButton: .default(alert.buttonTitle, action: { resetGame() }))
 			})
 		}
 	}
@@ -93,6 +92,9 @@ struct ContentView: View {
 	}
 	func checkDraw(in moves: [Move?]) -> Bool{
 		return moves.compactMap{ $0 }.count == 9
+	}
+	func resetGame(){
+		moves = Array(repeating: nil, count: 9)
 	}
 }
 
