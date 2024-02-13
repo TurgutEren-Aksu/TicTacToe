@@ -78,6 +78,10 @@ struct ContentView: View {
 		let computerMove = moves.compactMap{ $0 }.filter{ $0.player == .computer}
 		let computerPosition = Set(computerMove.map{$0.boardIndex})
 		
+		for pattern in winPatterns {
+			let winPosition = pattern.subtracting(computerPosition)
+		}
+		
 		var movePosition = Int.random(in: 0..<9)
 		
 		while isSquareOccupied(in: moves, forIndex: movePosition){
