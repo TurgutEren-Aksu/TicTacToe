@@ -80,6 +80,11 @@ struct ContentView: View {
 		
 		for pattern in winPatterns {
 			let winPosition = pattern.subtracting(computerPosition)
+			
+			if winPosition.count == 1 {
+				let isAvaible = !isSquareOccupied(in: moves, forIndex: winPosition.first!)
+				
+			}
 		}
 		
 		var movePosition = Int.random(in: 0..<9)
