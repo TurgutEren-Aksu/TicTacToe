@@ -83,6 +83,7 @@ struct ContentView: View {
 			
 			if winPosition.count == 1 {
 				let isAvaible = !isSquareOccupied(in: moves, forIndex: winPosition.first!)
+				if isAvaible { return winPosition.first!}
 				
 			}
 		}
