@@ -88,6 +88,19 @@ struct ContentView: View {
 			}
 		}
 		
+		let humanMove = moves.compactMap{ $0 }.filter{ $0.player == .human}
+		let humanPosition = Set(humanMove.map{$0.boardIndex})
+		
+		for pattern in winPatterns {
+			let winPosition = pattern.subtracting(humanPosition)
+			
+			if winPosition.count == 1 {
+				let isAvaible = !isSquareOccupied(in: moves, forIndex: winPosition.first!)
+				if isAvaible { return winPosition.first!}
+				
+			}
+		}
+		
 		var movePosition = Int.random(in: 0..<9)
 		
 		while isSquareOccupied(in: moves, forIndex: movePosition){
