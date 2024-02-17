@@ -100,6 +100,10 @@ struct ContentView: View {
 				
 			}
 		}
+		let centerSquare = 4
+		if !isSquareOccupied(in: moves, forIndex: 4) {
+			return centerSquare
+		}
 		
 		var movePosition = Int.random(in: 0..<9)
 		
