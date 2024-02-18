@@ -9,9 +9,6 @@ import SwiftUI
 
 
 struct ContentView: View {
-	let columns: [GridItem] = [GridItem(.flexible()),
-							   GridItem(.flexible()),
-							   GridItem(.flexible())]
 	@State private var moves: [Move?] = Array(repeating: nil, count: 9)
 	@State private var disabled = false
 	@State private var alert: Alerts?
