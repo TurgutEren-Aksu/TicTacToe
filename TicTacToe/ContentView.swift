@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+	@StateObject private var viewModel = GameViewModel()
 	@State private var moves: [Move?] = Array(repeating: nil, count: 9)
 	@State private var disabled = false
 	@State private var alert: Alerts?
@@ -16,7 +17,7 @@ struct ContentView: View {
 		GeometryReader{ geometry in
 			VStack{
 				Spacer()
-				LazyVGrid(columns: columns, spacing: 5){
+				LazyVGrid(columns: viewModel.columns, spacing: 5){
 					ForEach(0..<9){ i in
 						ZStack{
 							Circle()
