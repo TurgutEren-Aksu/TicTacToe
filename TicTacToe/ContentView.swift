@@ -10,9 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
 	@StateObject private var viewModel = GameViewModel()
-	@State private var moves: [Move?] = Array(repeating: nil, count: 9)
-	@State private var disabled = false
-	@State private var alert: Alerts?
+	
 	var body: some View {
 		GeometryReader{ geometry in
 			VStack{
