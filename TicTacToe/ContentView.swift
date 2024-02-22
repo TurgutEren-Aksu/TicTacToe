@@ -28,31 +28,7 @@ struct ContentView: View {
 								.foregroundColor(.red)
 						}
 						.onTapGesture {
-							if isSquareOccupied(in: moves, forIndex: i) {return}
-								moves[i] = Move(player: .human, boardIndex: i)
-							disabled = true
-							if winCheck(for: .human, in: moves){
-								alert = AlertContext.humanWin
-								return
-							}
-							if checkDraw(in: moves){
-								alert = AlertContext.draw
-								return
-							}
-							disabled = true
-							DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
-								let computerPosition = computer(in: moves)
-								moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
-								disabled = false
-								if winCheck(for: .computer, in: moves){
-									alert = AlertContext.computerWin
-									return
-								}
-								if checkDraw(in: moves){
-									alert = AlertContext.draw
-									return
-								}
-							}
+							
 						}
 					}
 				}

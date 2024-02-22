@@ -15,6 +15,33 @@ final class GameViewModel: ObservableObject{
 	@Published var moves: [Move?] = Array(repeating: nil, count: 9)
 	@Published var disabled = false
 	@Published var alert: Alerts?
+	func processPlayerMove(for position: Int){
+		if isSquareOccupied(in: moves, forIndex: position) {return}
+			moves[position] = Move(player: .human, boardIndex: position)
+		disabled = true
+		if winCheck(for: .human, in: moves){
+			alert = AlertContext.humanWin
+			return
+		}
+		if checkDraw(in: moves){
+			alert = AlertContext.draw
+			return
+		}
+		disabled = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+			let computerPosition = computer(in: moves)
+			moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
+			disabled = false
+			if winCheck(for: .computer, in: moves){
+				alert = AlertContext.computerWin
+				return
+			}
+			if checkDraw(in: moves){
+				alert = AlertContext.draw
+				return
+			}
+		}
+	}
 	func isSquareOccupied(in moves: [Move?], forIndex index:Int) -> Bool{
 		return moves.contains(where: {$0?.boardIndex == index})
 	}
