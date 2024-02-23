@@ -22,22 +22,22 @@ struct ContentView: View {
 								.foregroundColor(.black)
 								.opacity(1)
 								.frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
-							Image(systemName: moves[i]?.inducator ?? "")
+							Image(systemName: viewModel.moves[i]?.inducator ?? "")
 								.resizable()
 								.frame(width: 40, height: 40)
 								.foregroundColor(.red)
 						}
 						.onTapGesture {
-							
+							viewModel.processPlayerMove(for: <#T##Int#>)
 						}
 					}
 				}
 				Spacer()
 			}
-			.disabled(disabled)
+			.disabled(viewModel.disabled)
 			.padding()
-			.alert(item: $alert, content: {alert in
-				Alert(title: alert.title, message: alert.message, dismissButton: .default(alert.buttonTitle, action: { resetGame() }))
+			.alert(item: $viewModel.alert, content: {alert in
+				Alert(title: alert.title, message: alert.message, dismissButton: .default(alert.buttonTitle, action: { viewModel.resetGame() }))
 			})
 		}
 	}
