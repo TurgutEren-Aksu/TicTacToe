@@ -28,7 +28,7 @@ final class GameViewModel: ObservableObject{
 			return
 		}
 		disabled = true
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) { [self] in
 			let computerPosition = computer(in: moves)
 			moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
 			disabled = false
