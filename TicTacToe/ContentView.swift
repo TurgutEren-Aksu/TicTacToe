@@ -28,7 +28,7 @@ struct ContentView: View {
 								.foregroundColor(.red)
 						}
 						.onTapGesture {
-							viewModel.processPlayerMove(for: <#T##Int#>)
+							viewModel.processPlayerMove(for: i)
 						}
 					}
 				}
