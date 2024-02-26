@@ -18,11 +18,8 @@ struct ContentView: View {
 				LazyVGrid(columns: viewModel.columns, spacing: 5){
 					ForEach(0..<9){ i in
 						ZStack{
-							Circle()
-								.foregroundColor(.black)
-								.opacity(1)
-								.frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
-							Image(systemName: viewModel.moves[i]?.inducator ?? "")
+							ExtractedView()
+							Image(systemName: viewModel.moves[i]?.inducator ?? " ")
 								.resizable()
 								.frame(width: 40, height: 40)
 								.foregroundColor(.red)
@@ -60,4 +57,13 @@ struct Move {
 
 #Preview {
 	ContentView()
+}
+
+struct TicTacToeSquareView: View {
+	var body: some View {
+		Circle()
+			.foregroundColor(.black)
+			.opacity(1)
+			.frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
+	}
 }
