@@ -18,7 +18,7 @@ struct ContentView: View {
 				LazyVGrid(columns: viewModel.columns, spacing: 5){
 					ForEach(0..<9){ i in
 						ZStack{
-							ExtractedView()
+							TicTacToeSquareView(proxy: geometry)
 							Image(systemName: viewModel.moves[i]?.inducator ?? " ")
 								.resizable()
 								.frame(width: 40, height: 40)
@@ -60,10 +60,14 @@ struct Move {
 }
 
 struct TicTacToeSquareView: View {
+	
+	var proxy: GeometryProxy
+	
 	var body: some View {
 		Circle()
 			.foregroundColor(.black)
 			.opacity(1)
-			.frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
+			.frame(width: proxy.size.width/3-15,
+				   height: proxy.size.width/3-15)
 	}
 }
