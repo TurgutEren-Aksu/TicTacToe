@@ -19,10 +19,7 @@ struct ContentView: View {
 					ForEach(0..<9){ i in
 						ZStack{
 							TicTacToeSquareView(proxy: geometry)
-							Image(systemName: viewModel.moves[i]?.inducator ?? " ")
-								.resizable()
-								.frame(width: 40, height: 40)
-								.foregroundColor(.red)
+							GameImage(image: viewModel.moves[i]?.inducator ?? " ")
 						}
 						.onTapGesture {
 							viewModel.processPlayerMove(for: i)
@@ -69,5 +66,17 @@ struct TicTacToeSquareView: View {
 			.opacity(1)
 			.frame(width: proxy.size.width/3-15,
 				   height: proxy.size.width/3-15)
+	}
+}
+
+struct GameImage: View {
+	
+	var image: String
+	
+	var body: some View {
+		Image(systemName: image)
+			.resizable()
+			.frame(width: 40, height: 40)
+			.foregroundColor(.red)
 	}
 }
